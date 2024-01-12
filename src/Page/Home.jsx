@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import "../Components/css.css";
+import { Toaster } from "react-hot-toast";
 
 const Home = () => {
   const [Cards, setCards] = useState([]);
@@ -9,8 +10,9 @@ const Home = () => {
   const [doing, setDoing] = useState([]);
   const [toDo, setToDo] = useState([]);
   const [underReview, setUnderReview] = useState([]);
+
   useEffect(() => {
-    fetch("/Json.json")
+    fetch("https://job-task-server-one-psi.vercel.app/get-jobTask")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -39,9 +41,12 @@ const Home = () => {
 
   return (
     <div className=" overflow-x-scroll m-5 scroll-x">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-between w-screen gap-12  border ">
         <div className="max-h-full bg-slate-200">
-          <div className="text-xl font-bold text-black px-10 py-3">Incomplete</div>
+          <div className="text-xl font-bold text-black px-10 py-3">
+            Incomplete
+          </div>
           <div
             style={{ height: "calc(100vh - 100px)" }}
             className=" overflow-y-auto scroll-container overflow-x-hidden"
@@ -59,6 +64,7 @@ const Home = () => {
                   description={card.description}
                   message={card.message_count}
                   attachment={card.attachments_count}
+                  id={card.id}
                 ></Card>
               ))}
             </div>
@@ -74,6 +80,7 @@ const Home = () => {
               {toDo?.map((card, i) => (
                 <Card
                   key={i}
+                  id={card.id}
                   name={card.name}
                   img={card.img}
                   viewer_name={card.viewer_name}
@@ -89,7 +96,7 @@ const Home = () => {
           </div>
         </div>
         <div className="max-h-full bg-slate-200">
-          <div className="text-xl font-bold text-black px-10 py-3">Doing</div>
+          <div className="text-xl font-bold text-black px-10 py-3">Doing </div>
           <div
             style={{ height: "calc(100vh - 100px)" }}
             className=" overflow-y-auto scroll-container overflow-x-hidden"
@@ -107,13 +114,16 @@ const Home = () => {
                   description={card.description}
                   message={card.message_count}
                   attachment={card.attachments_count}
+                  id={card.id}
                 ></Card>
               ))}
             </div>
           </div>
         </div>
         <div className="max-h-full bg-slate-200">
-          <div className="text-xl font-bold text-black px-10 py-3">Under Review</div>
+          <div className="text-xl font-bold text-black px-10 py-3">
+            Under Review
+          </div>
           <div
             style={{ height: "calc(100vh - 100px)" }}
             className=" overflow-y-auto scroll-container overflow-x-hidden"
@@ -122,6 +132,7 @@ const Home = () => {
               {underReview?.map((card, i) => (
                 <Card
                   key={i}
+                  id={card.id}
                   name={card.name}
                   img={card.img}
                   viewer_name={card.viewer_name}
@@ -137,7 +148,9 @@ const Home = () => {
           </div>
         </div>
         <div className="max-h-full bg-slate-200">
-          <div className="text-xl font-bold text-black px-10 py-3">Complete</div>
+          <div className="text-xl font-bold text-black px-10 py-3">
+            Complete
+          </div>
           <div
             style={{ height: "calc(100vh - 100px)" }}
             className=" overflow-y-auto scroll-container overflow-x-hidden"
@@ -146,6 +159,7 @@ const Home = () => {
               {complete?.map((card, i) => (
                 <Card
                   key={i}
+                  id={card.id}
                   name={card.name}
                   img={card.img}
                   viewer_name={card.viewer_name}
