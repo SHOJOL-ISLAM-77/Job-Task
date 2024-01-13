@@ -44,7 +44,7 @@ const Card = ({
   const handleUpdateCount = async (id) => {
     const data = files.length;
     const result = await axios.put(
-      `https://job-task-server-one-psi.vercel.app/update-attachment/${id}`,
+      `http://localhost:7000/update-attachment/${id}`,
       {
         data: data,
       }
@@ -61,7 +61,7 @@ const Card = ({
     try {
       console.log(files.length);
       const response = await axios.post(
-        `https://job-task-server-one-psi.vercel.app/upload-files`,
+        `http://localhost:7000/upload-files`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

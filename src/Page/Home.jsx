@@ -12,7 +12,7 @@ const Home = () => {
   const [underReview, setUnderReview] = useState([]);
 
   useEffect(() => {
-    fetch("https://job-task-server-one-psi.vercel.app/get-jobTask")
+    fetch("http://localhost:7000/get-jobTask")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
